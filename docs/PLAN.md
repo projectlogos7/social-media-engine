@@ -110,7 +110,7 @@ readable, so the engine reads it directly instead of re-entering anything:
 | `tokens.json` — colours (with themes such as `ivory` / `ink`, and aliases like `{sandstone-red}`), type families + styles, spacing, radius, extra families (logo sizing, safe zones…) | Design tokens, compiled to CSS custom properties (`--sandstone-red`, `--font-serif`, `.display`, `--space-6`, `[data-theme="ink"]`), identical to how Claude compiles them |
 | `fonts/*.woff2` + `type.fonts[]` | `@font-face` rules; fonts embedded in the renderer so text is pixel-exact |
 | `assets/<Group>/…` (Mark, Lockups, Social-templates frames, avatars…) | Brand assets, grouped; templates reference them by role, e.g. *logo: horizontal reversed*, *frame: square sandstone* |
-| `README.md` + guideline sections (`10-logo.md`, `20-colour.md`, …) | Brand rules given to the AI planner as context, and turned into checks where they are precise (e.g. "gold never sets text", "never text on india-ink in sandstone") |
+| `README.md` + guideline sections (`10-logo.md`, `20-colour.md`, …) | Brand rules given to the AI planner as context, and turned into checks where they are precise (e.g. "gold never sets text", "sandstone-red is never text on india-ink") |
 | `50-voice.md` (voice section) | Voice rules for the copy writer |
 | Colour token `usage` notes with contrast ratios | Allowed text/ground pairs, enforced by the contrast gate |
 | `components/<Comp>/preview.html` (e.g. *LecturePost*) | Starting points for templates: the engine converts a showcase into a template with named slots |
@@ -136,7 +136,7 @@ Per project, the engine connects to the project's website(s):
    article, its hero image and key quotes; every factual claim in generated
    copy carries a link back to the source page.
 5. **Triggers** (later): new blog post / new product on the site → draft posts
-   automatically queued for review.
+   automatically created as drafts.
 
 The website is a content source only; the look always comes from the
 imported Claude design system.
