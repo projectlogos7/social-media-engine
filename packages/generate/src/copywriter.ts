@@ -50,7 +50,7 @@ export interface CopyRequest {
   variants: number;
   platforms: string[];
   /** Pages of a carousel: each entry is one template; the copywriter fills them as one story. */
-  validate: (v: CopyVariant) => string[];
+  validate: (v: CopyVariant) => string[] | Promise<string[]>;
   maxAttempts?: number;
 }
 
@@ -175,7 +175,7 @@ export async function writeCopy(r: CopyRequest): Promise<CopyResult> {
     last = (res.data.variants ?? []).slice(0, Math.max(1, r.variants));
     const allowed = new Set(r.knowledge.map((k) => k.url));
     for (const v of last) v.sourceUrls = (v.sourceUrls ?? []).filter((u) => allowed.has(u));
-    problems = last.flatMap((v, i) => r.validate(v).map((p) => `Variant ${i + 1}: ${p}`));
+    problems = (await Promise.all(last.map(async (v, i) => (await r.validate(v)).map((p) => `Variant ${i + 1}: ${p}`)))).flat();
     if (!problems.length) return { variants: last, model, attempts: attempt, problems: [] };
     if (attempt < maxAttempts) {
       messages.push(res.assistant, {
