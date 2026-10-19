@@ -1,5 +1,6 @@
 import { and, asc, desc, eq, max } from "drizzle-orm";
-import { FORMATS, type FormatId, type QualityIssue, type SlotValues, type TemplateSpec, TemplateSpecSchema, isImageRef, sha256 } from "@sme/core";
+import { FORMATS, type FormatId, type QualityIssue, type SlotValues, type TemplateSpec, TemplateSpecSchema, isImageRef } from "@sme/core";
+import { sha256 } from "@sme/core/hash";
 import { componentToTemplate, lintTemplate, starterTemplates, type StarterChoice } from "@sme/design";
 import { visualDiff } from "@sme/render";
 import { contentKey, type DB, getStorage, projects, templates, templateVersions } from "@sme/db";

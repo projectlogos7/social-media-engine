@@ -92,6 +92,12 @@ export function lintTemplate(spec: TemplateSpec, ctx: LintContext): QualityIssue
     }
   }
 
+  // Classes that share a name with a design-system type style pick up its styles.
+  const styleNames = new Set((ctx.tokens.type?.groups ?? []).flatMap((g) => (g.styles ?? []).map((st) => st.name)));
+  const classes = new Set([...spec.html.matchAll(/class\s*=\s*["']([^"']+)["']/g)].flatMap((m) => m[1].split(/\s+/)));
+  for (const c of classes)
+    if (styleNames.has(c)) warn(`The class "${c}" is also a design-system type style, so its font, size and spacing apply here. Rename it if that is not intended.`);
+
   // Assets
   for (const m of both.matchAll(/\{\{\s*asset\s+["']([^"']+)["']\s*\}\}/g)) {
     const p = m[1].replace(/^asset:/, "");

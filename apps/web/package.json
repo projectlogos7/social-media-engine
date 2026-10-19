@@ -1,0 +1,40 @@
+{
+  "name": "@sme/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -p ${PORT:-3000}",
+    "build": "next build",
+    "start": "next start -p ${PORT:-3000}",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.135.0",
+    "@aws-sdk/client-s3": "^3.1152.0",
+    "@mozilla/readability": "^0.6.0",
+    "@sme/core": "workspace:*",
+    "@sme/db": "workspace:*",
+    "@sme/design": "workspace:*",
+    "@sme/engine": "workspace:*",
+    "@sme/generate": "workspace:*",
+    "@sme/render": "workspace:*",
+    "drizzle-orm": "^0.44.7",
+    "fflate": "^0.8.3",
+    "handlebars": "^4.7.10",
+    "linkedom": "^0.18.13",
+    "next": "15.5.28",
+    "pixelmatch": "^7.2.0",
+    "playwright": "1.56.1",
+    "pngjs": "^7.0.0",
+    "postgres": "^3.4.9",
+    "react": "19.1.10",
+    "react-dom": "19.1.10",
+    "server-only": "^0.0.1",
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0"
+  }
+}

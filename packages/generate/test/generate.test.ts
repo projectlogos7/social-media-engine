@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type Anthropic from "@anthropic-ai/sdk";
-import { sha256, type Slot } from "@sme/core";
+import { type Slot } from "@sme/core";
+import { sha256 } from "@sme/core/hash";
 import { copySchema, placeholderProvider, seedFrom, writeCopy, type BrandContext, type CopyVariant } from "../src";
 
 const brand: BrandContext = {

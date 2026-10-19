@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile, unlink } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { GetObjectCommand, PutObjectCommand, DeleteObjectCommand, S3Client } from "@aws-sdk/client-s3";
@@ -53,8 +54,11 @@ class S3Storage implements Storage {
 
 let instance: Storage | undefined;
 
+/** DATA_DIR, else <repo root>/data (found by walking up to pnpm-workspace.yaml), else ./data. */
 export function dataDir(): string {
-  return resolve(process.env.DATA_DIR ?? join(process.cwd(), "data"));
+  if (process.env.DATA_DIR) return resolve(process.env.DATA_DIR);
+  for (let d = process.cwd(); d !== dirname(d); d = dirname(d)) if (existsSync(join(d, "pnpm-workspace.yaml"))) return join(d, "data");
+  return resolve("data");
 }
 
 export function getStorage(): Storage {

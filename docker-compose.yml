@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: sme
+      POSTGRES_PASSWORD: sme
+      POSTGRES_DB: sme
+    volumes: [db:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sme"]
+      interval: 5s
+      retries: 10
+
+  app:
+    build: .
+    depends_on:
+      db: { condition: service_healthy }
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://sme:sme@db:5432/sme
+      DATA_DIR: /data
+    ports: ["3000:3000"]
+    volumes: [files:/data]
+
+volumes:
+  db:
+  files:

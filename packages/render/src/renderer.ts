@@ -151,6 +151,8 @@ export class Renderer {
       const ctx = await this.browser.newContext({ viewport: { width: format.width, height: format.height }, deviceScaleFactor: 1, javaScriptEnabled: true, colorScheme: "light", locale: "en-US", timezoneId: "UTC" });
       // Templates are self-contained: every network request is refused.
       await ctx.route("**/*", (route) => route.abort());
+      // Bundlers that keep function names (tsx, esbuild keepNames) wrap functions in __name(); evaluated code needs it.
+      await ctx.addInitScript("globalThis.__name = globalThis.__name || ((f) => f);");
       try {
         const page = await ctx.newPage();
         return await fn(page);

@@ -15,7 +15,7 @@ import {
   type FileMap,
 } from "@sme/design";
 import { contentKey, type DB, designSystemVersions, dsFiles, getStorage, projects } from "@sme/db";
-import { sha256 } from "@sme/core";
+import { sha256 } from "@sme/core/hash";
 import { assertProject, type Actor } from "./access";
 import { EngineError, NotFound } from "./errors";
 import { Lru } from "./runtime";

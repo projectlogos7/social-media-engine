@@ -1,6 +1,6 @@
 import { and, desc, eq, inArray, sql } from "drizzle-orm";
 import { chunkText, crawlSite, type ExtractedPage } from "@sme/knowledge";
-import { sha256 } from "@sme/core";
+import { sha256 } from "@sme/core/hash";
 import { chunks, type DB, entities, enqueue, sources, webPages } from "@sme/db";
 import { assertProject, type Actor } from "./access";
 import { EngineError, NotFound } from "./errors";

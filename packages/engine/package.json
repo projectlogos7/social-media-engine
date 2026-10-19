@@ -9,8 +9,8 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "worker": "tsx src/worker-main.ts",
-    "seed": "tsx src/seed-main.ts"
+    "worker": "tsx --env-file-if-exists=../../.env src/worker-main.ts",
+    "seed": "tsx --env-file-if-exists=../../.env src/seed-main.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.135.0",

@@ -1,5 +1,7 @@
 # Social Media Engine — Plan
 
+> **Status:** all phases are implemented (see README.md). Differences from the plan: sign-in is email and password with sessions (no Auth.js / Google sign-in yet); website search is Postgres full-text search (no embeddings or pgvector yet); hosting is one Docker image (web + worker) on any container host, not Vercel, because rendering needs Chromium.
+
 An engine that produces on-brand social images and posts for multiple projects,
 where each project has a fixed design system, and where the output is
 **predictable**: the same inputs give the same result, and nothing leaves the

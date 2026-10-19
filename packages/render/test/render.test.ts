@@ -1,7 +1,8 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { resolve } from "node:path";
 import { mkdirSync, writeFileSync } from "node:fs";
-import { FORMATS, sha256, type TemplateSpec } from "@sme/core";
+import { FORMATS, type TemplateSpec } from "@sme/core";
+import { sha256 } from "@sme/core/hash";
 import { compileTokensCss, componentToTemplate, dataUri, deriveBrandRules, importFromFiles, readDirectory, type DesignSystemBundle } from "@sme/design";
 import { Renderer, visualDiff } from "../src";
 

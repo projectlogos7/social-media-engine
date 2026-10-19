@@ -27,7 +27,7 @@ export function starterTemplates(c: StarterChoice): TemplateSpec[] {
 [data-format="landscape"] .frame { padding: 56px 72px; }
 .eyebrow { font-size: 26px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; color: var(--${c.accent}); }
 .headline { font-family: var(--font-${c.headingFamily}); font-weight: 600; color: var(--${c.text}); margin: 0; }
-.body { color: var(--${muted}); }
+.copy { color: var(--${muted}); }
 .logo { height: 64px; width: auto; display: block; }
 .rule { height: 3px; background: var(--${c.accent}); width: 120px; }
 .foot { margin-top: auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }`;
@@ -42,15 +42,15 @@ export function starterTemplates(c: StarterChoice): TemplateSpec[] {
       html: `<div class="frame">
   {{#if eyebrow}}<div class="eyebrow" data-slot="eyebrow">{{eyebrow}}</div>{{/if}}
   <h1 class="headline" data-slot="headline">{{headline}}</h1>
-  {{#if body}}<p class="body" data-slot="body">{{body}}</p>{{/if}}
+  {{#if body}}<p class="copy" data-slot="body">{{body}}</p>{{/if}}
   <div class="foot">{{#if cta}}<div class="cta" data-slot="cta">{{cta}}</div>{{/if}}${logo}</div>
 </div>`,
       css: `${base}
 .eyebrow { margin-bottom: 32px; }
 .headline { font-size: 96px; line-height: 1.05; }
 [data-format="landscape"] .headline { font-size: 64px; }
-.body { font-size: 34px; line-height: 1.4; margin: 36px 0 0; max-width: 820px; }
-[data-format="landscape"] .body { font-size: 26px; }
+.copy { font-size: 34px; line-height: 1.4; margin: 36px 0 0; max-width: 820px; }
+[data-format="landscape"] .copy { font-size: 26px; }
 .cta { font-size: 28px; font-weight: 600; color: var(--${c.accent}); }`,
       slots: [
         { name: "eyebrow", label: "Eyebrow", type: "text", description: "Short label above the headline, 1–4 words.", required: false, maxChars: 32, maxLines: 1 },
@@ -69,7 +69,7 @@ export function starterTemplates(c: StarterChoice): TemplateSpec[] {
       html: `<div class="frame">
   <div class="rule"></div>
   <blockquote class="quote" data-slot="quote">{{quote}}</blockquote>
-  <div class="foot"><div><div class="who" data-slot="attribution">{{attribution}}</div>{{#if role}}<div class="body role" data-slot="role">{{role}}</div>{{/if}}</div>${logo}</div>
+  <div class="foot"><div><div class="who" data-slot="attribution">{{attribution}}</div>{{#if role}}<div class="copy role" data-slot="role">{{role}}</div>{{/if}}</div>${logo}</div>
 </div>`,
       css: `${base}
 .quote { font-family: var(--font-${c.headingFamily}); font-size: 64px; line-height: 1.2; margin: 48px 0 0; font-style: italic; }
@@ -122,14 +122,14 @@ export function starterTemplates(c: StarterChoice): TemplateSpec[] {
       role: "single",
       html: `<div class="frame">
   <div class="stat" data-slot="number">{{number}}</div>
-  <p class="headline label" data-slot="label">{{label}}</p>
-  <div class="foot"><div class="body source" data-slot="source">{{source}}</div>${logo}</div>
+  <p class="headline what" data-slot="label">{{label}}</p>
+  <div class="foot"><div class="copy source" data-slot="source">{{source}}</div>${logo}</div>
 </div>`,
       css: `${base}
 .stat { font-family: var(--font-${c.headingFamily}); font-size: 220px; line-height: 1; font-weight: 600; color: var(--${c.accent}); margin-top: 40px; }
 [data-format="landscape"] .stat { font-size: 140px; margin-top: 0; }
-.label { font-size: 52px; line-height: 1.15; margin-top: 24px; }
-[data-format="landscape"] .label { font-size: 38px; }
+.what { font-size: 52px; line-height: 1.15; margin-top: 24px; }
+[data-format="landscape"] .what { font-size: 38px; }
 .source { font-size: 22px; }`,
       slots: [
         { name: "number", label: "Number", type: "text", description: "The figure, with unit (e.g. 14%, 1.2M).", required: true, maxChars: 8, maxLines: 1 },
@@ -147,7 +147,7 @@ export function starterTemplates(c: StarterChoice): TemplateSpec[] {
       html: `<div class="frame">
   {{#if eyebrow}}<div class="eyebrow" data-slot="eyebrow">{{eyebrow}}</div>{{/if}}
   <h1 class="headline" data-slot="headline">{{headline}}</h1>
-  <div class="foot"><div class="body swipe">Swipe →</div>${logo}</div>
+  <div class="foot"><div class="copy swipe">Swipe →</div>${logo}</div>
 </div>`,
       css: `${base}
 .headline { font-size: 104px; line-height: 1.04; margin-top: 40px; }
@@ -167,13 +167,13 @@ export function starterTemplates(c: StarterChoice): TemplateSpec[] {
       html: `<div class="frame">
   <div class="num">{{#if page}}{{pad2 page.index}}{{/if}}</div>
   <h2 class="headline" data-slot="title">{{title}}</h2>
-  <p class="body" data-slot="text">{{text}}</p>
+  <p class="copy" data-slot="text">{{text}}</p>
   <div class="foot"><span></span>${logo}</div>
 </div>`,
       css: `${base}
 .num { font-family: var(--font-${c.headingFamily}); font-size: 80px; color: var(--${c.accent}); font-weight: 600; }
 .headline { font-size: 64px; line-height: 1.1; margin-top: 24px; }
-.body { font-size: 34px; line-height: 1.45; margin-top: 28px; }`,
+.copy { font-size: 34px; line-height: 1.45; margin-top: 28px; }`,
       slots: [
         { name: "title", label: "Title", type: "text", description: "Point title.", required: true, maxChars: 60, maxLines: 3 },
         { name: "text", label: "Text", type: "text", description: "Two or three sentences.", required: true, maxChars: 260, maxLines: 7 },
@@ -188,14 +188,14 @@ export function starterTemplates(c: StarterChoice): TemplateSpec[] {
       role: "end",
       html: `<div class="frame end">
   <h2 class="headline" data-slot="headline">{{headline}}</h2>
-  {{#if cta}}<p class="body" data-slot="cta">{{cta}}</p>{{/if}}
+  {{#if cta}}<p class="copy" data-slot="cta">{{cta}}</p>{{/if}}
   <div class="foot"><span></span>${logo}</div>
 </div>`,
       css: `${base}
 .end { justify-content: center; }
 .end .foot { margin-top: 0; position: absolute; left: 88px; right: 88px; bottom: 88px; }
 .headline { font-size: 80px; line-height: 1.08; }
-.body { font-size: 34px; margin-top: 28px; }`,
+.copy { font-size: 34px; margin-top: 28px; }`,
       slots: [
         { name: "headline", label: "Headline", type: "text", description: "Closing line.", required: true, maxChars: 60, maxLines: 3 },
         { name: "cta", label: "Call to action", type: "text", description: "What to do next.", required: false, maxChars: 80, maxLines: 2 },

@@ -89,7 +89,7 @@ export const ISMII_TEMPLATES: TemplateSpec[] = [
 <div class="box">
   {{#if eyebrow}}<div class="eyebrow" data-slot="eyebrow">{{eyebrow}}</div>{{/if}}
   <h1 class="headline" data-slot="headline">{{headline}}</h1>
-  {{#if body}}<p class="body" data-slot="body">{{body}}</p>{{/if}}
+  {{#if body}}<p class="para" data-slot="body">{{body}}</p>{{/if}}
   {{#if source}}<div class="source" data-slot="source">{{source}}</div>{{/if}}
 </div>
 ${IVORY_SIG}`,
@@ -97,8 +97,8 @@ ${IVORY_SIG}`,
 .eyebrow { color: var(--sandstone-red); margin-bottom: 32px; }
 .headline { font-family: var(--font-serif); font-weight: 600; font-size: 84px; line-height: 92px; color: var(--india-ink); margin: 0; }
 [data-format="landscape"] .headline { font-size: 56px; line-height: 62px; }
-.body { font-family: var(--font-sans); font-size: 34px; line-height: 50px; color: var(--india-ink); margin: 36px 0 0; max-width: 880px; }
-[data-format="landscape"] .body { font-size: 24px; line-height: 34px; margin-top: 20px; }
+.para { font-family: var(--font-sans); font-size: 34px; line-height: 50px; color: var(--india-ink); margin: 36px 0 0; max-width: 880px; }
+[data-format="landscape"] .para { font-size: 24px; line-height: 34px; margin-top: 20px; }
 .source { margin-top: auto; font-family: var(--font-sans); font-size: 24px; line-height: 32px; color: var(--india-ink); }`,
     slots: [
       { name: "eyebrow", label: "Label", type: "text", description: "Short label in capitals, e.g. RESEARCH NOTE. Two to four words.", required: false, maxChars: 28, maxLines: 1 },
@@ -185,7 +185,7 @@ ${IVORY_SIG}`,
 <div class="box">
   {{#if eyebrow}}<div class="eyebrow" data-slot="eyebrow">{{eyebrow}}</div>{{/if}}
   <div class="figure" data-slot="figure">{{figure}}</div>
-  <p class="label" data-slot="label">{{label}}</p>
+  <p class="measure" data-slot="label">{{label}}</p>
   <div class="source" data-slot="source">{{source}}</div>
 </div>
 ${IVORY_SIG}`,
@@ -193,8 +193,8 @@ ${IVORY_SIG}`,
 .eyebrow { color: var(--sandstone-red); }
 .figure { font-family: var(--font-serif); font-weight: 600; font-size: 240px; line-height: 240px; color: var(--sandstone-red); margin-top: 24px; }
 [data-format="landscape"] .figure { font-size: 150px; line-height: 150px; margin-top: 8px; }
-.label { font-family: var(--font-serif); font-weight: 600; font-size: 56px; line-height: 64px; color: var(--india-ink); margin: 24px 0 0; }
-[data-format="landscape"] .label { font-size: 38px; line-height: 44px; margin-top: 12px; }
+.measure { font-family: var(--font-serif); font-weight: 600; font-size: 56px; line-height: 64px; color: var(--india-ink); margin: 24px 0 0; }
+[data-format="landscape"] .measure { font-size: 38px; line-height: 44px; margin-top: 12px; }
 .source { margin-top: auto; font-family: var(--font-sans); font-size: 24px; line-height: 32px; color: var(--india-ink); }
 [data-format="landscape"] .source { font-size: 18px; line-height: 24px; }`,
     slots: [
@@ -239,7 +239,7 @@ ${IVORY_SIG}`,
   <div class="num">{{#if page}}{{pad2 page.index}}{{/if}}</div>
   <h2 class="title" data-slot="title">{{title}}</h2>
   <p class="text" data-slot="text">{{text}}</p>
-  <div class="foot"><div class="rule"></div><img data-role="logo" src="{{asset "Mark/ismii-mark-sandstone.svg"}}" alt="ISMII"><span class="folio">{{#if page}}{{page.index}} / {{page.count}}{{/if}}</span></div>
+  <div class="foot"><div class="rule"></div><img data-role="logo" src="{{asset "Mark/ismii-mark-sandstone.svg"}}" alt="ISMII"><span class="pageno">{{#if page}}{{page.index}} / {{page.count}}{{/if}}</span></div>
 </div>`,
     css: `.pg { position: absolute; inset: 0; background: var(--marble-ivory); padding: 104px 80px 0; display: flex; flex-direction: column; }
 .num { font-family: var(--font-serif); font-weight: 600; font-size: 96px; line-height: 96px; color: var(--sandstone-red); }
@@ -250,7 +250,7 @@ ${IVORY_SIG}`,
 .foot { position: absolute; left: 80px; right: 80px; bottom: 80px; display: flex; align-items: center; gap: 24px; }
 .rule { position: absolute; left: 0; right: 0; top: -40px; height: 2px; background: var(--deep-gold); }
 .foot img { height: 56px; width: 56px; }
-.folio { margin-left: auto; font-family: var(--font-mono); font-size: 24px; color: var(--india-ink); letter-spacing: 0.04em; }`,
+.pageno { margin-left: auto; font-family: var(--font-mono); font-size: 24px; color: var(--india-ink); letter-spacing: 0.04em; }`,
     slots: [
       { name: "title", label: "Point", type: "text", description: "The point of this page in a few words.", required: true, maxChars: 50, maxLines: 2 },
       { name: "text", label: "Explanation", type: "text", description: "Two or three plain sentences with one concrete detail.", required: true, maxChars: 260, maxLines: 10 },

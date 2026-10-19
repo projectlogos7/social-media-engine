@@ -1,6 +1,7 @@
 import { and, asc, desc, eq, inArray } from "drizzle-orm";
 import { zipSync, strToU8 } from "fflate";
-import { ENGINE_VERSION, FORMATS, type FormatId, type ImageGenerationRecord, type QualityReport, type Recipe, type SlotValues, type TemplateSpec, isImageRef, recipeHash, sha256 } from "@sme/core";
+import { ENGINE_VERSION, FORMATS, type FormatId, type ImageGenerationRecord, type QualityReport, type Recipe, type SlotValues, type TemplateSpec, isImageRef } from "@sme/core";
+import { recipeHash, sha256 } from "@sme/core/hash";
 import { assets, contentKey, type DB, getStorage, postPages, posts, projects, publications, renders, templates, templateVersions } from "@sme/db";
 import { assertProject, type Actor } from "./access";
 import { currentDsVersionId, loadDsRuntime } from "./designsystems";

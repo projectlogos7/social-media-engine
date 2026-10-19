@@ -1,6 +1,6 @@
 import { and, desc, eq, inArray } from "drizzle-orm";
 import sharp from "sharp";
-import { sha256 } from "@sme/core";
+import { sha256 } from "@sme/core/hash";
 import { dataUri } from "@sme/design";
 import { assets, contentKey, type DB, getStorage } from "@sme/db";
 import { assertProject, type Actor } from "./access";
