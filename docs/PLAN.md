@@ -186,7 +186,32 @@ update with diffs, scheduling/publishing integrations, team roles & approvals.
 
 ---
 
-## 8. Open questions
+## 8. Users, access & the central admin console
+
+All Nous/ISMII projects are administered from one super-admin console
+(`nous-admin`). The console never reads a project's database. Instead, each
+project exposes a signed **admin bridge** API at `/admin-bridge/v1`. This app
+must expose it as well. The contract is copied in
+[`admin-bridge.md`](admin-bridge.md).
+
+- **Phase 1 ships the bridge with the first login.** The app keeps its own
+  users, sessions and audit log. The bridge lets the console list, invite,
+  edit, disable and sign out users, and issue and revoke API keys.
+- **Design Phase 4 team roles to map onto the bridge.** Roles get stable keys
+  (`admin`, `editor`, `reviewer`, …) and are returned from `GET /meta`.
+  Decide early whether a user holds one role or many (`multiRole`). Also keep
+  the bridge's guarantees: always one active admin, disabling a user also
+  voids their sessions and API keys, and every change is audited with the
+  console actor.
+- **API keys** for scripts and integrations use the same model as Outreach's
+  `nok_` keys: a prefix plus a hash, optional scopes, a revoke timestamp and
+  `lastUsedAt`. That way they show up in the console with no extra work.
+- `ADMIN_BRIDGE_SECRET` (32+ characters) turns the bridge on. When it is
+  unset, the bridge routes return 404.
+
+---
+
+## 9. Open questions
 
 1. **Design systems today** — where do they live? (Figma files, tokens JSON,
    PDF brand guides, CSS of the website?) This decides the import path.
