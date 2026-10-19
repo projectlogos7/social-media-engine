@@ -51,7 +51,7 @@ export async function fail(db: DB, job: Job, error: string, retryable = true) {
       status: again ? "queued" : "failed",
       error,
       lockedAt: null,
-      runAt: again ? new Date(Date.now() + 2 ** job.attempts * 15_000) : job.runAt,
+      ...(again ? { runAt: new Date(Date.now() + 2 ** job.attempts * 15_000) } : {}),
       updatedAt: new Date(),
     })
     .where(and(eq(jobs.id, job.id)));

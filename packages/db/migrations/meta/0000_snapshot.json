@@ -1,5 +1,5 @@
 {
-  "id": "72808f02-80e3-4ca0-8b0c-65b6c03408be",
+  "id": "44a6f6e7-5574-4f67-a466-8bda79f2c68c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -1364,6 +1364,12 @@
           "notNull": true,
           "default": "'[]'::jsonb"
         },
+        "ds_version_id": {
+          "name": "ds_version_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
         "copy_meta": {
           "name": "copy_meta",
           "type": "jsonb",
@@ -2115,6 +2121,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "created_by": {
+          "name": "created_by",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp with time zone",
@@ -2136,6 +2148,19 @@
             "id"
           ],
           "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "sources_created_by_users_id_fk": {
+          "name": "sources_created_by_users_id_fk",
+          "tableFrom": "sources",
+          "tableTo": "users",
+          "columnsFrom": [
+            "created_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
           "onUpdate": "no action"
         }
       },

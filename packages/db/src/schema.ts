@@ -186,6 +186,8 @@ export const posts = pgTable(
     altText: text("alt_text").notNull().default(""),
     sourceUrls: jsonb("source_urls").notNull().default([]),
     formats: jsonb("formats").notNull().default([]),
+    /** The design-system version this post renders with (pinned for predictability). */
+    designSystemVersionId: uuid("ds_version_id").notNull(),
     copyMeta: jsonb("copy_meta"),
     batchId: uuid("batch_id"),
     createdBy: uuid("created_by").references(() => users.id, { onDelete: "set null" }),
@@ -240,6 +242,7 @@ export const sources = pgTable("sources", {
   status: text("status").notNull().default("idle"),
   lastError: text("last_error"),
   lastCrawledAt: timestamp("last_crawled_at", { withTimezone: true }),
+  createdBy: uuid("created_by").references(() => users.id, { onDelete: "set null" }),
   createdAt: created(),
 });
 

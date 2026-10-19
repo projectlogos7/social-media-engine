@@ -152,6 +152,7 @@ CREATE TABLE "posts" (
 	"alt_text" text DEFAULT '' NOT NULL,
 	"source_urls" jsonb DEFAULT '[]'::jsonb NOT NULL,
 	"formats" jsonb DEFAULT '[]'::jsonb NOT NULL,
+	"ds_version_id" uuid NOT NULL,
 	"copy_meta" jsonb,
 	"batch_id" uuid,
 	"created_by" uuid,
@@ -237,6 +238,7 @@ CREATE TABLE "sources" (
 	"status" text DEFAULT 'idle' NOT NULL,
 	"last_error" text,
 	"last_crawled_at" timestamp with time zone,
+	"created_by" uuid,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
@@ -326,6 +328,7 @@ ALTER TABLE "renders" ADD CONSTRAINT "renders_page_id_post_pages_id_fk" FOREIGN 
 ALTER TABLE "renders" ADD CONSTRAINT "renders_created_by_users_id_fk" FOREIGN KEY ("created_by") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "sessions" ADD CONSTRAINT "sessions_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "sources" ADD CONSTRAINT "sources_project_id_projects_id_fk" FOREIGN KEY ("project_id") REFERENCES "public"."projects"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "sources" ADD CONSTRAINT "sources_created_by_users_id_fk" FOREIGN KEY ("created_by") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "template_versions" ADD CONSTRAINT "template_versions_template_id_templates_id_fk" FOREIGN KEY ("template_id") REFERENCES "public"."templates"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "template_versions" ADD CONSTRAINT "template_versions_created_by_users_id_fk" FOREIGN KEY ("created_by") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "templates" ADD CONSTRAINT "templates_project_id_projects_id_fk" FOREIGN KEY ("project_id") REFERENCES "public"."projects"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint

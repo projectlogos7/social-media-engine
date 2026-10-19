@@ -69,8 +69,10 @@ function measure(): Measured {
     slots.push({
       name: el.dataset.slot!,
       rect: rel(r),
-      overflowX: el.scrollWidth > el.clientWidth + 1 && cs.overflowX !== "visible" ? true : clipped && r.right > c.right,
-      overflowY: (el.scrollHeight > el.clientHeight + 1 && cs.overflowY !== "visible") || clipped,
+      // Fonts with tall ascenders report a few px of scroll overflow even when every
+      // line fits, so overflow is measured in whole lines and real (word-length) widths.
+      overflowX: (cs.overflowX !== "visible" && el.scrollWidth - el.clientWidth > Math.max(4, parseFloat(cs.fontSize) * 0.2)) || (clipped && r.right > c.right),
+      overflowY: (cs.overflowY !== "visible" && tops.length * lh > el.clientHeight + 2) || clipped,
       lines: tops.length,
       color: cs.color,
       fontSize: parseFloat(cs.fontSize),
@@ -287,6 +289,20 @@ export class Renderer {
     return this.withPage(format, async (page) => {
       await page.setContent(html, { waitUntil: "load" });
       return page.pdf({ width: `${format.width}px`, height: `${format.height}px`, printBackground: true, margin: { top: "0", right: "0", bottom: "0", left: "0" } });
+    });
+  }
+
+  /** Loads a live web page with JavaScript (crawling sites that render client-side). Network allowed. */
+  async fetchRenderedHtml(url: string): Promise<string> {
+    return this.sem.run(async () => {
+      const ctx = await this.browser.newContext({ userAgent: "SocialMediaEngineBot/1.0 (+content import for the site owner)", javaScriptEnabled: true });
+      try {
+        const page = await ctx.newPage();
+        await page.goto(url, { waitUntil: "networkidle", timeout: 30_000 });
+        return await page.content();
+      } finally {
+        await ctx.close();
+      }
     });
   }
 

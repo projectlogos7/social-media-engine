@@ -11,7 +11,7 @@
     "db:generate": "pnpm --filter @sme/db generate",
     "db:migrate": "pnpm --filter @sme/db migrate",
     "seed": "pnpm --filter @sme/engine seed",
-    "typecheck": "tsc -b",
+    "typecheck": "for p in packages/*; do tsc -p $p --noEmit || exit 1; done && pnpm --filter @sme/web typecheck",
     "test": "vitest run"
   },
   "devDependencies": {

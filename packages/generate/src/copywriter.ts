@@ -49,7 +49,7 @@ export interface CopyRequest {
   knowledge: KnowledgeSnippet[];
   variants: number;
   platforms: string[];
-  /** Pages of a carousel: each entry is one template; the copywriter fills them as one story. */
+  /** Returns problems to send back for a fix (lengths, text fit, banned words). */
   validate: (v: CopyVariant) => string[] | Promise<string[]>;
   maxAttempts?: number;
 }
