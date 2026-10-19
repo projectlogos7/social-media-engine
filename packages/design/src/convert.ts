@@ -61,11 +61,22 @@ export function componentToTemplate(comp: BundleComponent, format: FormatId = "s
   const zoom = nativeWidth ? +(FORMATS[format].width / nativeWidth).toFixed(4) : 1;
 
   const assetize = (s: string) => s.replace(/asset:(assets\/[^'")\s]+)/g, (_m, p: string) => `{{asset "${p.replace(/^assets\//, "")}"}}`);
+  // body/html rules: keep inherited text styles (font, colour) on the wrapper, drop page layout.
+  const INHERITED = /^(font|font-[a-z-]+|color|line-height|letter-spacing|text-[a-z-]+|word-spacing|font-feature-settings|font-variation-settings)$/;
   const css = styleText
     .split("}")
     .map((r) => r.trim())
-    .filter((r) => r && !/^(html|body)\b/.test(r.split("{")[0].trim()) && r.includes("{"))
-    .map((r) => r + "}")
+    .filter((r) => r && r.includes("{"))
+    .map((r) => {
+      const [sel, decl] = r.split("{");
+      if (!/^(html|body)\b/.test(sel.trim())) return r + "}";
+      const kept = decl
+        .split(";")
+        .map((d) => d.trim())
+        .filter((d) => INHERITED.test(d.split(":")[0].trim().toLowerCase()));
+      return kept.length ? `.ds-scale { ${kept.join("; ")}; }` : "";
+    })
+    .filter(Boolean)
     .join("\n");
 
   const markup = `<div class="ds-scale" style="zoom: ${zoom}">\n${composition.outerHTML}\n</div>`;
