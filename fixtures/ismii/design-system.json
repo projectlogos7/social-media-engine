@@ -1,0 +1,238 @@
+{
+  "v": 3,
+  "assetGroups": {
+    "Icons-and-avatars": {
+      "files": {
+        "apple-touch-icon-180.png": {
+          "blob": "fa1cae5ead2b85c3ad2b96ad0823ee37",
+          "name": "apple-touch-icon-180.png",
+          "size": 8572,
+          "type": "image/png"
+        },
+        "favicon.svg": {
+          "blob": "932afe0661ce8eb091c59a3d43581a61",
+          "name": "favicon.svg",
+          "size": 8268,
+          "type": "image/svg+xml"
+        },
+        "ismii-avatar-ink.png": {
+          "blob": "7b6d2c21c25d442c5d99859a2d71fc6e",
+          "name": "ismii-avatar-ink.png",
+          "size": 40638,
+          "type": "image/png"
+        },
+        "ismii-avatar-ivory.png": {
+          "blob": "f3b7caf29edb5bb1a9076edfb4ef5c99",
+          "name": "ismii-avatar-ivory.png",
+          "size": 40483,
+          "type": "image/png"
+        },
+        "ismii-avatar-sandstone.png": {
+          "blob": "9efc265e65c4b4e4ec4236d5dfa90a68",
+          "name": "ismii-avatar-sandstone.png",
+          "size": 40482,
+          "type": "image/png"
+        }
+      },
+      "name": "Icons-and-avatars",
+      "order": [
+        "favicon.svg",
+        "apple-touch-icon-180.png",
+        "ismii-avatar-sandstone.png",
+        "ismii-avatar-ivory.png",
+        "ismii-avatar-ink.png"
+      ],
+      "tile": "s"
+    },
+    "Lockups": {
+      "files": {
+        "ismii-lockup-horizontal-full-colour.svg": {
+          "blob": "838629c72164438af70c00d4a91b629f",
+          "name": "ismii-lockup-horizontal-full-colour.svg",
+          "size": 41308,
+          "type": "image/svg+xml"
+        },
+        "ismii-lockup-horizontal-mono-ink.svg": {
+          "blob": "27ee3156781a599c767e11d5c0f5c42e",
+          "name": "ismii-lockup-horizontal-mono-ink.svg",
+          "size": 41309,
+          "type": "image/svg+xml"
+        },
+        "ismii-lockup-horizontal-mono-ivory.svg": {
+          "blob": "45d2490e3fe61e0bfcaff55f7fdff72a",
+          "name": "ismii-lockup-horizontal-mono-ivory.svg",
+          "size": 41309,
+          "type": "image/svg+xml"
+        },
+        "ismii-lockup-horizontal-reversed.svg": {
+          "blob": "e279402815b2a90bf23a0d5030601dbe",
+          "name": "ismii-lockup-horizontal-reversed.svg",
+          "size": 41309,
+          "type": "image/svg+xml"
+        },
+        "ismii-lockup-stacked-full-colour.svg": {
+          "blob": "5fcfc97fa198ea085e41ecf031c1f426",
+          "name": "ismii-lockup-stacked-full-colour.svg",
+          "size": 40728,
+          "type": "image/svg+xml"
+        },
+        "ismii-lockup-stacked-mono-ink.svg": {
+          "blob": "2fce181ed6321221bd7691674dd14db8",
+          "name": "ismii-lockup-stacked-mono-ink.svg",
+          "size": 40728,
+          "type": "image/svg+xml"
+        },
+        "ismii-lockup-stacked-mono-ivory.svg": {
+          "blob": "fe9897c3af985a070ce487a342941e8c",
+          "name": "ismii-lockup-stacked-mono-ivory.svg",
+          "size": 40728,
+          "type": "image/svg+xml"
+        },
+        "ismii-lockup-stacked-reversed.svg": {
+          "blob": "0e57d124a6ba185aa112ddc7fdf751c5",
+          "name": "ismii-lockup-stacked-reversed.svg",
+          "size": 40728,
+          "type": "image/svg+xml"
+        }
+      },
+      "name": "Lockups",
+      "order": [
+        "ismii-lockup-horizontal-full-colour.svg",
+        "ismii-lockup-horizontal-reversed.svg",
+        "ismii-lockup-horizontal-mono-ink.svg",
+        "ismii-lockup-horizontal-mono-ivory.svg",
+        "ismii-lockup-stacked-full-colour.svg",
+        "ismii-lockup-stacked-reversed.svg",
+        "ismii-lockup-stacked-mono-ink.svg",
+        "ismii-lockup-stacked-mono-ivory.svg"
+      ],
+      "tile": "l"
+    },
+    "Mark": {
+      "files": {
+        "ismii-mark-compact-ink.svg": {
+          "blob": "dce0f1dd2d9418bbf75abc646ce93658",
+          "name": "ismii-mark-compact-ink.svg",
+          "size": 8268,
+          "type": "image/svg+xml"
+        },
+        "ismii-mark-compact-ivory.svg": {
+          "blob": "2b4239d5910903b5a57a53901ee0e9b2",
+          "name": "ismii-mark-compact-ivory.svg",
+          "size": 8268,
+          "type": "image/svg+xml"
+        },
+        "ismii-mark-compact-sandstone.svg": {
+          "blob": "b597f7fcefc4bed6540ac3dc1c974602",
+          "name": "ismii-mark-compact-sandstone.svg",
+          "size": 8268,
+          "type": "image/svg+xml"
+        },
+        "ismii-mark-ink.svg": {
+          "blob": "517de99a70944abd0084f39041ff805e",
+          "name": "ismii-mark-ink.svg",
+          "size": 8708,
+          "type": "image/svg+xml"
+        },
+        "ismii-mark-ivory.svg": {
+          "blob": "6525dce5656cf6a88bf059346094c202",
+          "name": "ismii-mark-ivory.svg",
+          "size": 8708,
+          "type": "image/svg+xml"
+        },
+        "ismii-mark-sandstone.svg": {
+          "blob": "b55bd971b9cacc662eb7bd23b696d735",
+          "name": "ismii-mark-sandstone.svg",
+          "size": 8708,
+          "type": "image/svg+xml"
+        },
+        "ismii-seal.svg": {
+          "blob": "cf4238e0a08b1829f0548d392d8312b2",
+          "name": "ismii-seal.svg",
+          "size": 8780,
+          "type": "image/svg+xml"
+        }
+      },
+      "name": "Mark",
+      "order": [
+        "ismii-mark-sandstone.svg",
+        "ismii-mark-ink.svg",
+        "ismii-mark-ivory.svg",
+        "ismii-mark-compact-sandstone.svg",
+        "ismii-mark-compact-ink.svg",
+        "ismii-mark-compact-ivory.svg",
+        "ismii-seal.svg"
+      ],
+      "tile": "m"
+    },
+    "Social-templates": {
+      "files": {
+        "ismii-og-link-preview-1200x630-ivory.png": {
+          "blob": "5b1cbb328d21eedbe15b0942c6c7d3c2",
+          "name": "ismii-og-link-preview-1200x630-ivory.png",
+          "size": 190614,
+          "type": "image/png"
+        },
+        "ismii-og-link-preview-1200x630-sandstone.png": {
+          "blob": "9340c3e529418db1846ce8de85b273e5",
+          "name": "ismii-og-link-preview-1200x630-sandstone.png",
+          "size": 148247,
+          "type": "image/png"
+        },
+        "ismii-post-frame-square-1080x1080-ivory.png": {
+          "blob": "39f7520464dfe355d93064b827b3b42b",
+          "name": "ismii-post-frame-square-1080x1080-ivory.png",
+          "size": 253029,
+          "type": "image/png"
+        },
+        "ismii-post-frame-square-1080x1080-sandstone.png": {
+          "blob": "662604b3e1dd3fbc0f1c0d8c09377ba7",
+          "name": "ismii-post-frame-square-1080x1080-sandstone.png",
+          "size": 219153,
+          "type": "image/png"
+        },
+        "ismii-story-frame-1080x1920-ivory.png": {
+          "blob": "4e7772ae43d6e7332f30630bbf64e399",
+          "name": "ismii-story-frame-1080x1920-ivory.png",
+          "size": 385354,
+          "type": "image/png"
+        }
+      },
+      "name": "Social-templates",
+      "order": [
+        "ismii-og-link-preview-1200x630-ivory.png",
+        "ismii-og-link-preview-1200x630-sandstone.png",
+        "ismii-post-frame-square-1080x1080-ivory.png",
+        "ismii-post-frame-square-1080x1080-sandstone.png",
+        "ismii-story-frame-1080x1920-ivory.png"
+      ],
+      "tile": "l"
+    }
+  },
+  "blobs": {},
+  "createdOnFiles": {
+    "at": "2026-09-24T15:45:00Z",
+    "v": 1
+  },
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "groups": [
+    "Mark",
+    "Lockups",
+    "Icons-and-avatars",
+    "Social-templates"
+  ],
+  "lastChange": {
+    "at": "2026-09-24T15:45:00Z",
+    "by": "Nous",
+    "note": "Built from the ISMII brand pack: brand book, tokens, fonts, logo files, showcases and cover.",
+    "via": "Claude chat"
+  },
+  "layout": "files",
+  "libraries": [],
+  "namespace": "ISMII",
+  "sections": {},
+  "title": "ISMII"
+}

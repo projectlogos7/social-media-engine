@@ -1,0 +1,62 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ISMII</title>
+<style>
+  html, body { margin:0; height:100%; }
+  body { background:var(--ground); color:var(--text); font-family:var(--font-sans); overflow:hidden; }
+  .cover { position:relative; height:288px; overflow:hidden; }
+  .art { position:absolute; top:0; left:480px; width:480px; height:288px; overflow:hidden; }
+  .art svg { display:block; width:480px; height:288px; }
+  .sand { fill:var(--sandstone-red); }
+  .teal { fill:var(--deccani-teal); }
+  .deep { fill:var(--text); }
+  .gold { fill:var(--rosette-gold); }
+  .cut { fill:var(--marble-ivory); }
+  .cutg { fill:var(--ground); }
+  .sq { rx:var(--radius-none); }
+  .words { position:absolute; left:var(--space-6); bottom:var(--space-6); max-width:440px; }
+  .name { margin:0; font-family:var(--font-serif); font-size:120px; line-height:.92; font-weight:600; letter-spacing:.01em; color:var(--text); }
+  .tag { margin:var(--space-2) 0 0 4px; font-size:14px; line-height:20px; color:var(--text-body); }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 480 288" width="480" height="288">
+<!--
+  blocks      sandstone-red 192x280 slab bled off the top (the one colour that carries the mark) · text (india-ink / ivory by theme) 144x168 · deccani-teal 96x216 bleeding off the right · rosette-gold 144x4 rule over the ink block
+  arrangement one tall sandstone slab with two satellites, bottoms on one line space-4 above the edge, space-4 gutters
+  pattern     literal motif: the mark's eight-pointed star (a square plus a diamond), cut from the slab in marble-ivory on a space-6 pitch, 12 units; one large star cut from the ink block in ground, as in the reversed mark
+  scales      sides in space-3 multiples; gutters space-4; pitch space-6; star squares space-3 and space-5; corners radius-none (the system is square)
+-->
+<rect class="sand sq" x="24" y="-16" width="192" height="280"/>
+<rect class="deep sq" x="240" y="96" width="144" height="168"/>
+<rect class="teal sq" x="408" y="48" width="96" height="216"/>
+<rect class="gold sq" x="240" y="72" width="144" height="4"/>
+<g class="cut">
+<g transform="translate(72 64)"><rect x="-8" y="-8" width="16" height="16"/><rect x="-8" y="-8" width="16" height="16" transform="rotate(45)"/></g>
+<g transform="translate(120 64)"><rect x="-8" y="-8" width="16" height="16"/><rect x="-8" y="-8" width="16" height="16" transform="rotate(45)"/></g>
+<g transform="translate(168 64)"><rect x="-8" y="-8" width="16" height="16"/><rect x="-8" y="-8" width="16" height="16" transform="rotate(45)"/></g>
+<g transform="translate(72 112)"><rect x="-8" y="-8" width="16" height="16"/><rect x="-8" y="-8" width="16" height="16" transform="rotate(45)"/></g>
+<g transform="translate(120 112)"><rect x="-8" y="-8" width="16" height="16"/><rect x="-8" y="-8" width="16" height="16" transform="rotate(45)"/></g>
+<g transform="translate(168 112)"><rect x="-8" y="-8" width="16" height="16"/><rect x="-8" y="-8" width="16" height="16" transform="rotate(45)"/></g>
+<g transform="translate(72 160)"><rect x="-8" y="-8" width="16" height="16"/><rect x="-8" y="-8" width="16" height="16" transform="rotate(45)"/></g>
+<g transform="translate(120 160)"><rect x="-8" y="-8" width="16" height="16"/><rect x="-8" y="-8" width="16" height="16" transform="rotate(45)"/></g>
+<g transform="translate(168 160)"><rect x="-8" y="-8" width="16" height="16"/><rect x="-8" y="-8" width="16" height="16" transform="rotate(45)"/></g>
+<g transform="translate(72 208)"><rect x="-8" y="-8" width="16" height="16"/><rect x="-8" y="-8" width="16" height="16" transform="rotate(45)"/></g>
+<g transform="translate(120 208)"><rect x="-8" y="-8" width="16" height="16"/><rect x="-8" y="-8" width="16" height="16" transform="rotate(45)"/></g>
+<g transform="translate(168 208)"><rect x="-8" y="-8" width="16" height="16"/><rect x="-8" y="-8" width="16" height="16" transform="rotate(45)"/></g>
+</g>
+<g class="cutg" transform="translate(312 180)"><rect x="-16" y="-16" width="32" height="32"/><rect x="-16" y="-16" width="32" height="32" transform="rotate(45)"/></g>
+</svg>
+</div>
+<div class="words">
+<h1 class="name">ISMII</h1>
+<p class="tag">Institute for the Study of Muslims and Islam in India</p>
+</div>
+</div>
+</body>
+</html>

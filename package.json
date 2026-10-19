@@ -1,0 +1,26 @@
+{
+  "name": "social-media-engine",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.28.0",
+  "scripts": {
+    "dev": "pnpm --filter @sme/web dev",
+    "build": "pnpm --filter @sme/web build",
+    "start": "pnpm --filter @sme/web start",
+    "worker": "pnpm --filter @sme/engine worker",
+    "db:generate": "pnpm --filter @sme/db generate",
+    "db:migrate": "pnpm --filter @sme/db migrate",
+    "seed": "pnpm --filter @sme/engine seed",
+    "typecheck": "tsc -b",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["sharp", "esbuild"]
+  }
+}

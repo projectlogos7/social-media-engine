@@ -1,0 +1,28 @@
+<!-- @dsCard group="Showcase" height=420 width=960 page="true" subtitle="The lockup on each approved ground" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Signature</title>
+<style>
+  body{margin:0;background:var(--ground);font-family:var(--font-sans);}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3);padding:var(--space-3);}
+  .tile{height:112px;display:flex;align-items:center;justify-content:center;position:relative;}
+  .tile.wide{grid-column:span 2;}
+  .tile img{width:70%;max-width:420px;}
+  .cap{position:absolute;left:var(--space-2);bottom:var(--space-1);font-size:11px;letter-spacing:.08em;text-transform:uppercase;}
+  .ivory{background:var(--marble-ivory);outline:1px solid rgba(28,27,25,.12);outline-offset:-1px}.ivory .cap{color:var(--india-ink)}
+  .marble{background:var(--warm-marble)}.marble .cap{color:var(--india-ink)}
+  .ink{background:var(--india-ink)}.ink .cap{color:var(--muted-sand)}
+  .sand{background:var(--sandstone-red)}.sand .cap{color:var(--marble-ivory)}
+  .teal{background:var(--deccani-teal)}.teal .cap{color:var(--marble-ivory)}
+</style></head>
+<body>
+<div class="grid" id="root">
+  <div class="tile ivory wide"><img alt="ISMII lockup, full colour" src="/_blob/838629c72164438af70c00d4a91b629f"><span class="cap">Full colour · Marble Ivory</span></div>
+  <div class="tile marble"><img alt="ISMII stacked lockup" style="width:auto;height:88px" src="/_blob/5fcfc97fa198ea085e41ecf031c1f426"><span class="cap">Stacked · Warm Marble</span></div>
+  <div class="tile ink wide"><img alt="ISMII lockup, reversed" src="/_blob/e279402815b2a90bf23a0d5030601dbe"><span class="cap">Reversed · India Ink</span></div>
+  <div class="tile sand"><img alt="ISMII mark, ivory" style="width:auto;height:72px" src="/_blob/6525dce5656cf6a88bf059346094c202"><span class="cap">Mark · Sandstone</span></div>
+  <div class="tile sand wide"><img alt="ISMII lockup, mono ivory" src="/_blob/45d2490e3fe61e0bfcaff55f7fdff72a"><span class="cap">Mono ivory · Sandstone Red</span></div>
+  <div class="tile teal"><img alt="ISMII stacked lockup, mono ivory" style="width:auto;height:88px" src="/_blob/fe9897c3af985a070ce487a342941e8c"><span class="cap">Mono ivory · Deccani Teal</span></div>
+</div>
+<script>/* static showcase */</script>
+</body></html>
