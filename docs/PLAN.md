@@ -44,8 +44,11 @@ real typography, never AI-drawn letters.
 
 ```
 Workspace
- └─ Project                      e.g. "Acme Coffee", "Nous Podcast"
-     ├─ DesignSystem (versioned, immutable once published)
+ ├─ Members (users + roles, see §6)
+ ├─ Provider keys (image + text model API keys, encrypted)
+ └─ Project                      e.g. "ISMII", "Nous Podcast"
+     ├─ DesignSystem (versioned, immutable once published,
+     │                imported from a Claude Design System — see §4)
      │   ├─ tokens: colors, type scale, fonts, spacing, radii, shadows
      │   ├─ assets: logos (variants), patterns, icons, fonts files
      │   ├─ imagery style: style prompt, negative prompt, reference images,
@@ -59,8 +62,10 @@ Workspace
      ├─ Sources (website(s), sitemaps, RSS, uploaded docs)
      │   └─ Knowledge: crawled pages → clean text + structured entities
      ├─ Asset library (uploaded photos, product shots, approved generations)
-     └─ Posts
-         └─ Renders  ← each one stores its full "recipe"
+     ├─ Posts
+     │   └─ Renders  ← each one stores its full "recipe"; saved in the
+     │                 project's image library, downloadable any time
+     └─ Channels (later): connected Instagram / LinkedIn accounts
 ```
 
 **Design system lock:** a project points to one *published* design system
@@ -94,7 +99,31 @@ were.
 
 ---
 
-## 4. Website data & content
+## 4. Importing Claude Design Systems
+
+Design systems are authored in Claude (the "Design System" artifact type) and
+imported into the engine. That format is already structured and machine
+readable, so the engine reads it directly instead of re-entering anything:
+
+| Claude Design System file | Becomes in the engine |
+|---|---|
+| `tokens.json` — colours (with themes such as `ivory` / `ink`, and aliases like `{sandstone-red}`), type families + styles, spacing, radius, extra families (logo sizing, safe zones…) | Design tokens, compiled to CSS custom properties (`--sandstone-red`, `--font-serif`, `.display`, `--space-6`, `[data-theme="ink"]`), identical to how Claude compiles them |
+| `fonts/*.woff2` + `type.fonts[]` | `@font-face` rules; fonts embedded in the renderer so text is pixel-exact |
+| `assets/<Group>/…` (Mark, Lockups, Social-templates frames, avatars…) | Brand assets, grouped; templates reference them by role, e.g. *logo: horizontal reversed*, *frame: square sandstone* |
+| `README.md` + guideline sections (`10-logo.md`, `20-colour.md`, …) | Brand rules given to the AI planner as context, and turned into checks where they are precise (e.g. "gold never sets text", "never text on india-ink in sandstone") |
+| `50-voice.md` (voice section) | Voice rules for the copy writer |
+| Colour token `usage` notes with contrast ratios | Allowed text/ground pairs, enforced by the contrast gate |
+| `components/<Comp>/preview.html` (e.g. *LecturePost*) | Starting points for templates: the engine converts a showcase into a template with named slots |
+
+**How it gets in:** export/download the design system from Claude and upload
+the folder (zip) to a project. The importer validates it against the same
+token grammar Claude uses, shows what it found (and anything it dropped),
+then publishes it as a new locked version. Re-importing an updated design
+system creates the next version; nothing already rendered changes.
+
+---
+
+## 5. Website data & content
 
 Per project, the engine connects to the project's website(s):
 
@@ -109,29 +138,48 @@ Per project, the engine connects to the project's website(s):
 5. **Triggers** (later): new blog post / new product on the site → draft posts
    automatically queued for review.
 
-Brand bootstrapping: the crawler can also *propose* a starter design system
-(colors, fonts, logo) from the site, which a human then confirms and locks.
+The website is a content source only; the look always comes from the
+imported Claude design system.
 
 ---
 
-## 5. User flows
+## 6. Users & roles
 
-- **Set up a project:** create project → import/define design system
-  (manual, from tokens JSON, from Figma, or proposed from website) → publish v1.
+Multiple users per workspace, no approval step: anyone allowed to create
+posts can export them directly.
+
+| Role | Can |
+|---|---|
+| **Owner** | Everything, billing, API keys, delete workspace |
+| **Admin** | Manage members and projects, connect websites, manage provider keys |
+| **Designer** | Import/publish design systems, create and edit templates, plus everything an Editor can do |
+| **Editor** | Create, edit, render, export and save posts |
+| **Viewer** | Browse projects, posts and the image library, download |
+
+Roles are given per workspace and can be narrowed per project (e.g. an
+Editor on *ISMII* only). Every render records who made it.
+
+---
+
+## 7. User flows
+
+- **Set up a project:** create project → upload the Claude Design System
+  export → review → publish v1 → connect the website.
 - **Create templates:** pick format → build layout from components
-  (headline block, image block, logo, CTA, quote card, stat card, carousel page)
+  (headline block, image block, logo, CTA, quote card, stat card, event card),
+  or start from one of the design system's showcase components
   → define slots → save golden sample.
 - **Make a post:** choose project → choose template (or "suggest one") →
   write a brief or pick website content → engine fills slots + generates image
-  candidates → preview all variants → edit any slot inline → approve → export
-  (PNG/JPG, carousel ZIP/PDF, caption text).
+  candidates → preview all variants → edit any slot inline → save & export
+  (PNG/JPG + caption text). Saved images stay in the project's library.
 - **Batch:** "10 posts from our last 5 blog articles in these 2 templates."
 - **Re-render:** design system updated → re-render chosen posts with the new
   version, side-by-side diff.
 
 ---
 
-## 6. Proposed tech stack
+## 8. Tech stack
 
 | Concern | Choice | Notes |
 |---|---|---|
@@ -143,7 +191,8 @@ Brand bootstrapping: the crawler can also *propose* a starter design system
 | Jobs | Queue (pg-boss or BullMQ) | Crawls, generations, renders are async |
 | Renderer | Playwright + Chromium, HTML/CSS templates | Real fonts, exact layout, measurable text fit |
 | Copy / planning | Claude via Anthropic API with structured (JSON-schema) output | |
-| Images | Adapter over several providers (e.g. Flux, Imagen, gpt-image, Ideogram) | Per project, choose the one that holds its style best |
+| Images | One adapter interface, several providers: OpenAI (gpt-image), Google (Imagen / Gemini image), Black Forest Labs Flux (via fal or Replicate), Ideogram | Each project picks a default provider + model in its imagery settings; workspace stores the API keys |
+| Auth | Auth.js (email magic link + Google) with workspace/project role checks | |
 | Crawling | Playwright + readability extraction | |
 
 Packages:
@@ -151,7 +200,7 @@ Packages:
 ```
 apps/web            UI + API
 packages/core       domain types, schemas, recipe format
-packages/design     design-system schema, token → CSS compiler, template linter
+packages/design     Claude DS importer, token → CSS compiler, template linter
 packages/render     Playwright renderer, text-fit + contrast checks
 packages/generate   LLM slot filling, image-provider adapters
 packages/knowledge  crawler, extractor, embeddings, retrieval
@@ -160,40 +209,67 @@ packages/worker     job runner
 
 ---
 
-## 7. Phased delivery
+## 9. Formats (first release)
+
+| Platform | Format | Size |
+|---|---|---|
+| Instagram | Square post | 1080 × 1080 |
+| Instagram | Portrait post (4:5) | 1080 × 1350 |
+| Instagram | Story / Reel cover (9:16) | 1080 × 1920, with the design system's bottom safe zone |
+| LinkedIn | Landscape post / link image | 1200 × 627 |
+| LinkedIn | Square post | 1080 × 1080 (shared with Instagram) |
+| LinkedIn | Portrait post | 1080 × 1350 (shared with Instagram) |
+
+Each template declares which formats it supports; one post can be exported in
+several formats at once. **Later:** carousels (Instagram multi-image, LinkedIn
+PDF document), YouTube thumbnails (1280 × 720), and more.
+
+---
+
+## 10. Phased delivery
 
 **Phase 0 — Foundations (week 1)**
-Monorepo, DB schema, design-system JSON schema, token→CSS compiler, one
-hard-coded template rendered to PNG via Playwright. *Proof: same input → byte-identical PNG.*
+Monorepo, DB schema, Claude Design System importer + token→CSS compiler,
+one template (ISMII lecture post) rendered to PNG via Playwright.
+*Proof: import ISMII; same input → byte-identical PNG.*
 
 **Phase 1 — Deterministic posts (weeks 2–3)**
-Projects, versioned design systems, template editor with slots, manual slot
-filling, render + export, golden-snapshot tests, text-fit/contrast gates.
-*Proof: a non-designer can make on-brand posts with zero AI.*
+Workspace, users & roles, projects, versioned design systems, template editor
+with slots, manual slot filling, Instagram + LinkedIn formats, render, save to
+library, export, golden-snapshot tests, text-fit/contrast gates.
+*Proof: an Editor can make on-brand posts for two projects with zero AI.*
 
 **Phase 2 — AI content (weeks 4–5)**
-Brief → LLM fills slots via schema; voice rules; image generation with
-per-project style, seeds and candidates; recipes stored; asset library.
+Brief → Claude fills slots via schema using the design system's voice rules;
+image-provider adapters (OpenAI, Google, Flux, Ideogram) with per-project
+style, seeds and candidates; recipes stored.
 *Proof: 20 generated posts, all pass gates, all look like the brand.*
 
 **Phase 3 — Website knowledge (weeks 6–7)**
 Crawler, extraction, embeddings, "post from this page", source citations,
-starter design system from website.
+new-content triggers that draft posts.
 
-**Phase 4 — Scale & automation (week 8+)**
-Batch generation, carousels, new-content triggers, re-render on design-system
-update with diffs, scheduling/publishing integrations, team roles & approvals.
+**Phase 4 — Publishing & more formats (week 8+)**
+Connect Instagram (Graph API, business/creator accounts) and LinkedIn (member
+and organization pages), post now or schedule; carousels; YouTube thumbnails;
+batch generation; re-render on design-system update with diffs.
 
 ---
 
-## 8. Open questions
+## 11. Decisions so far
 
-1. **Design systems today** — where do they live? (Figma files, tokens JSON,
-   PDF brand guides, CSS of the website?) This decides the import path.
-2. **Image generation** — any preferred provider / existing accounts? Do you
-   want photorealistic imagery, illustration, or mostly typographic posts?
-3. **Platforms & formats** — Instagram, LinkedIn, X, TikTok covers, YouTube
-   thumbnails? Carousels? Video later?
-4. **Who uses it** — just you, or a team with review/approval roles?
-5. **Hosting** — self-hosted (Docker) vs managed (Vercel + Supabase/Neon + R2)?
-6. **Publishing** — export files only, or post directly to the platforms?
+| Question | Decision |
+|---|---|
+| Design systems | Authored in Claude (Design System artifacts), imported as exported folders |
+| Image generation | Support all major providers behind one adapter; photo, illustration and typographic posts |
+| Platforms | Instagram + LinkedIn first; carousels, YouTube thumbnails later |
+| Users | Multiple users with roles; no approval step |
+| Publishing | Export + save to library now; direct posting in Phase 4 |
+
+## 12. Still open
+
+1. **Hosting** — self-hosted (Docker on a VPS) or managed (Vercel + Neon/Supabase + R2)?
+   Default if no preference: managed, because the renderer and workers can run
+   as one small container alongside.
+2. **API keys** — which image providers you'll get keys for first (the engine
+   will work with any one of them).
